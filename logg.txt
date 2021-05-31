@@ -1,0 +1,26 @@
+app is running on 3000
+uniquePhoneNumbers [ 9068295107 ]
+data1 0 ------ [
+  {
+    _id: 60b4e6eed28d903f84ac696c,
+    name: 'Ross',
+    phoneNumber: 9068295107,
+    company: 'Airtel',
+    internetUsed: '500mb',
+    callDuration: '1.4h',
+    billPaid: 2021-05-31T13:38:54.809Z,
+    __v: 0
+  },
+  {
+    _id: 60b4e707d28d903f84ac696d,
+    name: 'Ross',
+    phoneNumber: 9068295107,
+    company: 'Airtel',
+    internetUsed: '1020mb',
+    callDuration: '1.4h',
+    billPaid: 2021-05-31T13:39:19.800Z,
+    __v: 0
+  }
+]
+Total charge internet : 510
+Total charge call : 648

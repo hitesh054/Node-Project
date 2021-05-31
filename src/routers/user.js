@@ -4,7 +4,7 @@ const User = require('../models/user.js')
 const router = new express.Router()
 const { totalCharges } = require('../utils/utils.js')
 
-router.post("/tele-bill/consumption", async(req, res) => {
+router.post("/tele-bill/consumption", async (req, res) => {
     // console.log(req.body)
     const user = new User(req.body)
     try {
@@ -25,7 +25,7 @@ router.post('/tele-bill/myBill', (req, res) => {
             res.status(500).send(error)
         } else {
             let myBill = totalCharges(data, company)
-                // console.log(Math.round(myBill))
+            // console.log(Math.round(myBill))
             res.send({
                 "Phone Number": phone,
                 "Company": company,
@@ -40,6 +40,7 @@ router.get('/tele-bill/reminder', (req, res) => {
     let beforeDate = new Date()
     let response = []
     let data1 = []
+    let userData = 0
     beforeDate.setDate(beforeDate.getDate() - 90)
     User.find({ "billPaid": { $gte: beforeDate, $lte: todayDate } }, (error, data) => {
         if (error) {
@@ -49,14 +50,16 @@ router.get('/tele-bill/reminder', (req, res) => {
                 return item.phoneNumber
 
             })))]
+            console.log("uniquePhoneNumbers", uniquePhoneNumbers)
             uniquePhoneNumbers.forEach((number, i) => {
                 data1 = data.filter((item) => {
                     return item.phoneNumber == number
                 })
-                console.log(i, "-----------", data1)
-                let airtelCharges = totalCharges(data1, 'Airtel')
-                let vodafoneCharges = totalCharges(data1, 'Vodafone')
-                let total = airtelCharges + vodafoneCharges
+                console.log("data1", i, "------", data1)
+
+                let airtelCharges = totalCharges(data1);
+                // let vodafoneCharges = totalCharges(data1, 'Vodafone')
+                let total = airtelCharges
                 if (total > 600) {
                     userData = {
                         "Phone Number": number,
